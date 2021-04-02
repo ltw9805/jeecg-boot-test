@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jeecg-boot-parent</artifactId>
+        <groupId>org.jeecgframework.boot</groupId>
+        <version>2.4.3</version>
+
+        <!--        <artifactId>jeecg-cloud-module</artifactId>-->
+        <!--        <groupId>org.jeecgframework.boot</groupId>-->
+        <!--        <version>2.4.3</version>-->
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>jeecg-boot-module-teacher</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <!--项目子模块-->
+    <modules>
+        <module>jeecg-boot-module-teacher-api</module>
+        <module>jeecg-boot-module-teacher-biz</module>
+        <module>jeecg-boot-module-teacher-start</module>
+    </modules>
+    <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>org.redisson</groupId>-->
+<!--            <artifactId>redisson</artifactId>-->
+<!--            <version>3.13.6</version>-->
+<!--        </dependency>-->
+        <!-- 引入分布式锁依赖 -->
+        <dependency>
+            <groupId>org.jeecgframework.boot</groupId>
+            <artifactId>jeecg-boot-starter-lock</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
+
