@@ -1,6 +1,0 @@
-server:
-  #微服务端口
-  port: 7007
-spring:
-  application:
-    name: jeecg-boot-test
