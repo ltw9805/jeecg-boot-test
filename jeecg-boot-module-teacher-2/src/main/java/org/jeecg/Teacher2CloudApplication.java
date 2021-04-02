@@ -8,6 +8,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 //(exclude = {ShiroAnnotationProcessorAutoConfiguration.class,
 //        ShiroAutoConfiguration.class,
 //        ShiroBeanAutoConfiguration.class})
+
+
 @SpringBootApplication
 @EnableFeignClients
 public class Teacher2CloudApplication {
