@@ -62,6 +62,8 @@ public class TeacherController extends JeecgController<Teacher, ITeacherService>
 	 */
 
 	//  @PermissionData(pageComponent = "teacher2/TeacherList")
+	// 开启 数据权限规则验证
+
 	@AutoLog(value = "老师表-分页列表查询")
 
 	@ApiOperation(value="老师表-分页列表查询", notes="老师表-分页列表查询")
