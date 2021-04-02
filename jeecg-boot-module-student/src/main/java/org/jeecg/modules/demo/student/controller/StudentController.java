@@ -60,10 +60,11 @@ public class StudentController extends JeecgController<Student, IStudentService>
 	 * @param req
 	 * @return
 	 */
+
 	@AutoLog(value = "学生表-分页列表查询")
 	@ApiOperation(value="学生表-分页列表查询", notes="学生表-分页列表查询")
 	@GetMapping(value = "/list")
-//	@PermissionData(pageComponent="student/StudentList")
+	@PermissionData(pageComponent="student/StudentList")
 	public Result<?> queryPageList(Student student,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,

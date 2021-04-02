@@ -10,6 +10,7 @@ import java.net.URLDecoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jeecg.common.api.vo.Result;
+import org.jeecg.common.aspect.annotation.PermissionData;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.demo.teacher.entity.Teacher;
@@ -59,9 +60,13 @@ public class TeacherController extends JeecgController<Teacher, ITeacherService>
 	 * @param req
 	 * @return
 	 */
+
+	//  @PermissionData(pageComponent = "teacher2/TeacherList")
 	@AutoLog(value = "老师表-分页列表查询")
+
 	@ApiOperation(value="老师表-分页列表查询", notes="老师表-分页列表查询")
 	@GetMapping(value = "/list")
+	@PermissionData(pageComponent = "teacher2/TeacherList")
 	public Result<?> queryPageList(Teacher teacher,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,

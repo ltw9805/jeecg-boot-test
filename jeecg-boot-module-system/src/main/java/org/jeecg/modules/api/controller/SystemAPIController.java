@@ -33,7 +33,7 @@ public class SystemAPIController {
      *
      * @param message 使用构造器赋值参数 如果不设置category(消息类型)则默认为2 发送系统消息
      */
-    @PostMapping("/sendSysAnnouncement")
+    @PostMapping("/ssendSysAnnouncement")
     public void sendSysAnnouncement(@RequestBody MessageDTO message) {
         sysBaseAPI.sendSysAnnouncement(message);
     }
