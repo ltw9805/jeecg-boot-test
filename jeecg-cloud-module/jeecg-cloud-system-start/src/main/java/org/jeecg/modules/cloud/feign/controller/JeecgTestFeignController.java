@@ -12,7 +12,7 @@ import org.jeecg.modules.cloud.constant.CloudConstant;
 //import org.jeecg.modules.cloud.feign.feign.FeignTestClient;
 import org.jeecg.modules.cloud.feign.feign.*;
 
-import org.jeecg.modules.demo.api.TeacherFeignCLient;
+import org.jeecg.modules.demo.api.TeacherFeignClient;
 import org.jeecg.modules.demo.api.TeacherFeignClientDyn;
 import org.jeecg.starter.cloud.feign.impl.JeecgFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class JeecgTestFeignController {
     private RabbitMqClient rabbitMqClient;
 
     @Autowired
-    TeacherFeignCLient teacherFeignCLient;
+    TeacherFeignClient teacherFeignClient;
 
     @Autowired
     Teacher2FeignCLient teacher2FeignCLient;
@@ -45,7 +45,7 @@ public class JeecgTestFeignController {
 
 
 
-    // cloud-api 中的feign调用
+//     cloud-api 中的feign调用
 //    @GetMapping("/feign/demandManagement/button")
 //    Result<String> buttonDm(){
 //
@@ -53,11 +53,17 @@ public class JeecgTestFeignController {
 //    }
 
 
+    @GetMapping("/feign/teacher/getTeacher")
+    @ApiOperation(value = "测试teacher的button-feign", notes = "测试teacher的button-feign")
+    public Result<?> getTeacher(){
+        return teacherFeignClient.getTeacherList();
+    }
+
 
     @GetMapping("/feign/teacher/button")
     @ApiOperation(value = "测试teacher的button-feign", notes = "测试teacher的button-feign")
     public Result<String> button(){
-        return teacherFeignCLient.button();
+        return teacherFeignClient.button();
     }
 
     @GetMapping("/feign/teacher/button2")

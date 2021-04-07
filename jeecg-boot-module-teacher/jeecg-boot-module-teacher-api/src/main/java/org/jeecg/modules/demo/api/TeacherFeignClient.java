@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient(value = "teacher-cloud")
 @Component
-public interface TeacherFeignCLient {
+public interface TeacherFeignClient {
 
     @GetMapping("/teacher/teacher/button")
     Result<String> button();
+
+    @GetMapping("/teacher/teacher/getTeacher")
+    Result<?> getTeacherList();
 
 }

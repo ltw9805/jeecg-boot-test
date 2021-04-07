@@ -22,19 +22,19 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/teacher/teacher")
 public class TeacherFeignController {
-//
-//    @Autowired
-//    private ITeacherService teacherService;
-//
-//
-//    @Autowired
-//    TeacherFeignImpl TeacherFeign;
-//
-//    @GetMapping("/getTeacher")
-//    public Result<?> getTeacher(){
-//        return Result.OK(TeacherFeign.getTeacher());
-//
-//    }
+
+    @Autowired
+    private ITeacherService teacherService;
+
+
+    @Autowired
+    TeacherFeignImpl TeacherFeign;
+
+    @GetMapping("/getTeacher")
+    public Result<?> getTeacher(){
+        return Result.OK(TeacherFeign.getTeacher());
+
+    }
 
     @GetMapping("/button")
     public Result<String> button(){
