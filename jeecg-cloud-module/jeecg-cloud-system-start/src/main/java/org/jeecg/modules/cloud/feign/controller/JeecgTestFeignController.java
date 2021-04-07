@@ -7,16 +7,17 @@ import io.swagger.annotations.ApiOperation;
 import org.jeecg.boot.starter.rabbitmq.client.RabbitMqClient;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.base.BaseMap;
+//import org.jeecg.common.system.api.IDamandMApi;
 import org.jeecg.modules.cloud.constant.CloudConstant;
 //import org.jeecg.modules.cloud.feign.feign.FeignTestClient;
-import org.jeecg.modules.cloud.feign.entiy.Teacher;
 import org.jeecg.modules.cloud.feign.feign.*;
 
+import org.jeecg.modules.demo.api.TeacherFeignCLient;
+import org.jeecg.modules.demo.api.TeacherFeignClientDyn;
 import org.jeecg.starter.cloud.feign.impl.JeecgFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +39,19 @@ public class JeecgTestFeignController {
 
     @Autowired
     Teacher2FeignCLient teacher2FeignCLient;
+
+//    @Autowired
+//    IDamandMApi IDamandMApi;
+
+
+
+    // cloud-api 中的feign调用
+//    @GetMapping("/feign/demandManagement/button")
+//    Result<String> buttonDm(){
+//
+//        return  IDamandMApi.button();
+//    }
+
 
 
     @GetMapping("/feign/teacher/button")
@@ -67,11 +81,11 @@ public class JeecgTestFeignController {
     }
 
 
-    @GetMapping("/feign/teacher")
-    @ApiOperation(value = "测试学生的feign", notes = "测试学生的feign")
-    public Result<?> getTeacher() {
-        return teacherFeignCLient.getTeacher();
-    }
+//    @GetMapping("/feign/teacher")
+//    @ApiOperation(value = "测试学生的feign", notes = "测试学生的feign")
+//    public Result<?> getTeacher() {
+//        return teacherFeignCLient.getTeacher();
+//    }
 
 
     @GetMapping("getMessage")

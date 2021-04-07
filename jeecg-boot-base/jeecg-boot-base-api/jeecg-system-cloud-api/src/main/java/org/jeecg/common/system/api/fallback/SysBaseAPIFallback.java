@@ -118,6 +118,12 @@ public class SysBaseAPIFallback implements ISysBaseAPI {
         return null;
     }
 
+//    @Override
+//    public List<ComboModel> queryAllRole() {
+//        log.error("获取角色信息失败 {}", cause);
+//        return null;
+//    }
+
     @Override
     public List<ComboModel> queryAllRole(String[] roleIds) {
         log.error("获取角色信息失败 {}", cause);

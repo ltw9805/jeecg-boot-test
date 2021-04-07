@@ -206,6 +206,9 @@ public interface ISysBaseAPI extends CommonAPI {
      *
      * @return
      */
+//    @GetMapping("/sys/api/queryAllRole")
+//    public List<ComboModel> queryAllRole();
+
     @GetMapping("/sys/api/queryAllRole")
     public List<ComboModel> queryAllRole(@RequestParam(name = "roleIds", required = false) String[] roleIds);
 
