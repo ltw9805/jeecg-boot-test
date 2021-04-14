@@ -47,6 +47,11 @@
             <groupId>org.jeecgframework.boot</groupId>
             <artifactId>jeecg-boot-starter-lock</artifactId>
         </dependency>
+        <!--  可能出现@profile.name@ 读取不了的问题，添加snakeyaml     -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+        </dependency>
 
     </dependencies>
 

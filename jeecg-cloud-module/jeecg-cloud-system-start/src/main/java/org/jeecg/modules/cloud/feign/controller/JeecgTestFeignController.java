@@ -7,11 +7,11 @@ import io.swagger.annotations.ApiOperation;
 import org.jeecg.boot.starter.rabbitmq.client.RabbitMqClient;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.base.BaseMap;
-//import org.jeecg.common.system.api.IDamandMApi;
+
 import org.jeecg.modules.cloud.constant.CloudConstant;
-//import org.jeecg.modules.cloud.feign.feign.FeignTestClient;
 import org.jeecg.modules.cloud.feign.feign.*;
 
+//
 import org.jeecg.modules.demo.api.TeacherFeignClient;
 import org.jeecg.modules.demo.api.TeacherFeignClientDyn;
 import org.jeecg.starter.cloud.feign.impl.JeecgFeignService;

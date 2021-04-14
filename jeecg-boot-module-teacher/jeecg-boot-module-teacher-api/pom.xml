@@ -8,12 +8,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jeecg-boot-module-teacher-api</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>teacher-local-api</module>
+        <module>teacher-cloud-api</module>
+    </modules>
     <dependencies>
-        <!-- feign -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.jeecgframework.boot</groupId>
             <artifactId>jeecg-boot-base-core</artifactId>

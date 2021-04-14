@@ -89,8 +89,9 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
-        log.debug("===============Shiro身份认证开始============doGetAuthenticationInfo==========");
+        log.info("===============Shiro身份认证开始============doGetAuthenticationInfo==========");
         String token = (String) auth.getCredentials();
+
         if (token == null) {
             log.info("————————身份认证失败——————————IP地址:  "+ oConvertUtils.getIpAddrByRequest(SpringContextUtils.getHttpServletRequest()));
             throw new AuthenticationException("token为空!");
@@ -98,6 +99,12 @@ public class ShiroRealm extends AuthorizingRealm {
         // 校验token有效性
         LoginUser loginUser = this.checkUserTokenIsEffect(token);
         return new SimpleAuthenticationInfo(loginUser, token, getName());
+        /**
+         *  public  SimpleAuthenticationInfo(Object principal, Object credentials, String realmName)
+         *  1、principal：认证的实体信息，可以是username，也可以是实体类对象
+         *  2、credentials：验证principal的凭证
+         *  3、当前realm对象的名字，调用父类的getName()即可获取
+         */
     }
 
     /**

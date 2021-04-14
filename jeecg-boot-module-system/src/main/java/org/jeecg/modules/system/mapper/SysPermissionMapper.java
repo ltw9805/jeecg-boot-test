@@ -54,5 +54,11 @@ public interface SysPermissionMapper extends BaseMapper<SysPermission> {
      */
     public int queryCountByUsername(@Param("username") String username, @Param("permission") SysPermission sysPermission);
 
-
+    /**
+     * 根据用户id和部门id查找菜单权限
+     * @param userId
+     * @param orgCode
+     * @return
+     */
+    List<SysPermission> queryUserDepartPermissions(@Param("userId") String userId, @Param("orgCode") String orgCode);
 }

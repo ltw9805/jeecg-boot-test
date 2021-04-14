@@ -207,9 +207,11 @@ public class SysPermissionController {
         try {
             //直接获取当前用户不适用前端token
             LoginUser loginUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
+            log.info("{}",loginUser);
             if (oConvertUtils.isEmpty(loginUser)) {
                 return Result.error("请登录系统！");
             }
+            //查询所有的权限
             List<SysPermission> metaList = sysPermissionService.queryByUser(loginUser.getUsername());
             //添加首页路由
             //update-begin-author:taoyan date:20200211 for: TASK #3368 【路由缓存】首页的缓存设置有问题，需要根据后台的路由配置来实现是否缓存
@@ -223,14 +225,17 @@ public class SysPermissionController {
             this.getPermissionJsonArray(menujsonArray, metaList, null);
             JSONArray authjsonArray = new JSONArray();
             this.getAuthJsonArray(authjsonArray, metaList);
-            //查询所有的权限
+            //查询所有的按钮权限，4
+            // del_flag  int(1)  删除状态 0正常 1已删除
+            // menu_type int(11) 菜单类型(0:一级菜单; 1:子菜单:2:按钮权限)
+            // status varchar(2) 按钮权限状态(0无效1有效
             LambdaQueryWrapper<SysPermission> query = new LambdaQueryWrapper<SysPermission>();
             query.eq(SysPermission::getDelFlag, CommonConstant.DEL_FLAG_0);
             query.eq(SysPermission::getMenuType, CommonConstant.MENU_TYPE_2);
-            //query.eq(SysPermission::getStatus, "1");
+//            query.eq(SysPermission::getStatus, "1");
             List<SysPermission> allAuthList = sysPermissionService.list(query);
             JSONArray allauthjsonArray = new JSONArray();
-            this.getAllAuthJsonArray(allauthjsonArray, allAuthList);
+            this.getAllAuthJsonArray(allauthjsonArray, allAuthList);  //将所有的菜单权限更改格式
             //路由菜单
             json.put("menu", menujsonArray);
             //按钮权限（用户拥有的权限集合）

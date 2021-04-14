@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 7777
   tomcat:
     max-swallow-size: -1
   error:
@@ -7,7 +7,8 @@ server:
     include-stacktrace: ALWAYS
     include-message: ALWAYS
   servlet:
-    context-path: /jeecg-boot
+#    context-path: /jeecg-boot
+    context-path:
   compression:
     enabled: true
     min-response-size: 1024
@@ -144,7 +145,7 @@ spring:
   #redis 配置
   redis:
     database: 0
-    host: 127.0.0.1
+    host: 47.95.246.107
     lettuce:
       pool:
         max-active: 8   #最大连接数据库连接数,设 0 为没有限制
@@ -154,6 +155,24 @@ spring:
       shutdown-timeout: 100ms
     password: ''
     port: 6379
+  #rabbitmq配置
+  rabbitmq:
+    host: 47.95.246.107
+    username: admin
+    password: admin
+    port: 5672
+    publisher-returns: true
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual
+        #消费者的最小数量
+        concurrency: 1
+        #消费者的最大数量
+        max-concurrency: 1
+        #是否支持重试
+        retry:
+          enabled: true
 #mybatis plus 设置
 mybatis-plus:
   mapper-locations: classpath*:org/jeecg/modules/**/xml/*Mapper.xml
@@ -240,7 +259,7 @@ jeecg:
       data-type: yml
   #分布式锁配置
   redisson:
-    address: 127.0.0.1:6379
+    address: 47.95.246.107:6379
     password:
     type: STANDALONE
     enabled: true

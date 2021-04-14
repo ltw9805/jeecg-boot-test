@@ -20,12 +20,10 @@ import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.*;
 import org.jeecg.common.util.encryption.EncryptedString;
 import org.jeecg.modules.system.entity.SysDepart;
+import org.jeecg.modules.system.entity.SysPermission;
 import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.model.SysLoginModel;
-import org.jeecg.modules.system.service.ISysDepartService;
-import org.jeecg.modules.system.service.ISysDictService;
-import org.jeecg.modules.system.service.ISysLogService;
-import org.jeecg.modules.system.service.ISysUserService;
+import org.jeecg.modules.system.service.*;
 import org.jeecg.modules.system.util.RandImageUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +58,8 @@ public class LoginController {
     private ISysDictService sysDictService;
     @Resource
     private BaseCommonService baseCommonService;
+    @Autowired
+    private ISysPermissionService sysPermissionService;
 
     private static final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
 
@@ -118,6 +118,7 @@ public class LoginController {
         BeanUtils.copyProperties(sysUser, loginUser);
         baseCommonService.addLog("用户名: " + username + ",登录成功！", CommonConstant.LOG_TYPE_1, null, loginUser);
         //update-end--Author:wangshuai  Date:20200714  for：登录日志没有记录人员
+        log.info("返回给前端的数据为：{}",result);
         return result;
     }
 
@@ -125,7 +126,7 @@ public class LoginController {
      * 退出登录
      *
      * @param request
-     * @param response
+     * @param response SystemInitListener
      * @return
      */
     @RequestMapping(value = "/logout")
@@ -233,6 +234,26 @@ public class LoginController {
         result.setResult(obj);
         return result;
     }
+    @RequestMapping(value = "/selectDepart2", method = RequestMethod.PUT)
+    public Result<JSONObject> selectDepart2(@RequestBody SysUser user) {
+        Result<JSONObject> result = new Result<JSONObject>();
+        String username = user.getUsername();
+        if (oConvertUtils.isEmpty(username)) {
+            LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
+            username = sysUser.getUsername();
+        }
+        String orgCode = user.getOrgCode();
+        this.sysUserService.updateUserDepart(username, orgCode);
+        SysUser sysUser = sysUserService.getUserByName(username);
+        List<SysPermission> departList = sysPermissionService.queryUserDepartPermissions(sysUser.getId(),orgCode);
+        JSONObject obj = new JSONObject();
+        obj.put("userInfo", sysUser);
+        obj.put("departPer",departList);
+        result.setResult(obj);
+        return result;
+    }
+    //查询所有的权限
+
 
     /**
      * 短信登录接口
@@ -361,6 +382,8 @@ public class LoginController {
      * @return
      */
     private Result<JSONObject> userInfo(SysUser sysUser, Result<JSONObject> result) {
+        //  sysUser 为根据前端传来的用户名在数据库中查询到的用户信息，
+        //  result ： 为将要返回给前端的数据
         String syspassword = sysUser.getPassword();
         String username = sysUser.getUsername();
         // 生成token
@@ -369,9 +392,10 @@ public class LoginController {
         redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
         redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME * 2 / 1000);
 
-        // 获取用户部门信息
+        // 获取用户id部门信息
         JSONObject obj = new JSONObject();
         List<SysDepart> departs = sysDepartService.queryUserDeparts(sysUser.getId());
+        log.info(username+" 的部门信息：{}",departs);
         obj.put("departs", departs);
         if (departs == null || departs.size() == 0) {
             obj.put("multi_depart", 0);
@@ -423,16 +447,16 @@ public class LoginController {
         Result<String> res = new Result<String>();
         try {
             String code = RandomUtil.randomString(BASE_CHECK_CODES, 4);
-            System.out.println("code==="+code);
+            log.info("验证码==={}",code);
             String lowerCaseCode = code.toLowerCase();
             //realKey:通过生成的4位字符串code+key(传来的时间戳)，通过MD5生成一个realKey
             String realKey = MD5Util.MD5Encode(lowerCaseCode + key, "utf-8");
-            System.out.println("realKey==="+realKey);
+//            System.out.println("realKey==="+realKey);
             //将(realKey, lowerCaseCode)放入redis，
             redisUtil.set(realKey, lowerCaseCode, 60);
             //将验证码转化为base64返回
             String base64 = RandImageUtil.generate(code);
-            System.out.println("base64==="+base64);
+//            System.out.println("base64==="+base64);
             res.setSuccess(true);
             res.setResult(base64);
         } catch (Exception e) {

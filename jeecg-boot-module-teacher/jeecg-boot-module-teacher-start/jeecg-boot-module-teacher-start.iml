@@ -265,7 +265,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.2.10.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.2.10.RELEASE" level="project" />
     <orderEntry type="module" module-name="jeecg-boot-module-teacher-biz" />
-    <orderEntry type="module" module-name="jeecg-boot-module-teacher-api" />
+    <orderEntry type="module" module-name="teacher-local-api" />
     <orderEntry type="module" module-name="jeecg-boot-starter-lock" />
     <orderEntry type="library" name="Maven: org.redisson:redisson:3.13.6" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.53.Final" level="project" />

@@ -37,6 +37,12 @@ public interface ISysPermissionService extends IService<SysPermission> {
 
     public List<SysPermission> queryByUser(String username);
 
+
+    //查找用户的某个部门权限
+    public List<SysPermission> queryUserDepartPermissions(String userId,String orgCode);
+
+
+
     /**
      * 根据permissionId删除其关联的SysPermissionDataRule表中的数据
      *
@@ -69,4 +75,7 @@ public interface ISysPermissionService extends IService<SysPermission> {
      * @return
      */
     public boolean hasPermission(String username, String url);
+
+
+
 }

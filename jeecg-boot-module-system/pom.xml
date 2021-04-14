@@ -57,7 +57,10 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-<!--        单体使用开启依赖 -->
+<!--        单体使用开启依赖，
+            nacos中路由文件修改：1、lb到jeecg-system
+                            或者2、jeecg-system的path添加 /teacher/teacher/**
+            -->
 <!--        <dependency>-->
 <!--            <groupId>org.jeecgframework.boot</groupId>-->
 <!--            <artifactId>jeecg-boot-module-teacher-biz</artifactId>-->
@@ -65,11 +68,17 @@
 <!--            <scope>compile</scope>-->
 <!--        </dependency>-->
 
+<!--        <dependency>-->
+<!--            <groupId>org.example</groupId>-->
+<!--            <artifactId>jeecg-boot-module-demandMangement</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>jeecg-boot-module-demandMangement</artifactId>
+            <groupId>org.jeecgframework.boot</groupId>
+            <artifactId>teacher-cloud-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
 
     </dependencies>
 

@@ -103,6 +103,7 @@ public class SysUserController {
      * @param req
      * @return
      */
+    @RequiresRoles({"admin"}) // 会进入到 Realm的doGetAuthorizationInfo()
     @PermissionData(pageComponent = "system/UserList")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result<IPage<SysUser>> queryPageList(SysUser user, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,

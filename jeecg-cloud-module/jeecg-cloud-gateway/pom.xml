@@ -79,6 +79,12 @@
             <artifactId>knife4j-spring-boot-starter</artifactId>
             <version>${knife4j-spring-boot-starter.version}</version>
         </dependency>
+
+        <!--  可能出现@profile.name@ 读取不了的问题，添加snakeyaml     -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -40,6 +40,35 @@
     </select>
 
     <!-- 获取登录用户拥有的权限 -->
+<!--    <select id="queryByUser" parameterType="Object" resultMap="SysPermission">-->
+<!--        SELECT * FROM (-->
+<!--        SELECT p.*-->
+<!--        FROM sys_permission p-->
+<!--        WHERE (exists(-->
+<!--        select a.id from sys_role_permission a-->
+<!--        join sys_role b on a.role_id = b.id-->
+<!--        join sys_user_role c on c.role_id = b.id-->
+<!--        join sys_user d on d.id = c.user_id-->
+<!--        where p.id = a.permission_id AND d.username = #{username,jdbcType=VARCHAR}-->
+<!--        )-->
+<!--        or (p.url like '%:code' and p.url like '/online%' and p.hidden = 1)-->
+<!--        or p.url = '/online')-->
+<!--        and p.del_flag = 0-->
+<!--        &lt;!&ndash;update begin Author:lvdandan  Date:20200213 for：加入部门权限 &ndash;&gt;-->
+<!--        UNION-->
+<!--        SELECT p.*-->
+<!--        FROM sys_permission p-->
+<!--        WHERE exists(-->
+<!--        select a.id from sys_depart_role_permission a-->
+<!--        join sys_depart_role b on a.role_id = b.id-->
+<!--        join sys_depart_role_user c on c.drole_id = b.id-->
+<!--        join sys_user d on d.id = c.user_id-->
+<!--        where p.id = a.permission_id AND d.username = #{username,jdbcType=VARCHAR}-->
+<!--        )-->
+<!--        and p.del_flag = 0-->
+<!--        &lt;!&ndash;update end Author:lvdandan  Date:20200213 for：加入部门权限 &ndash;&gt;-->
+<!--        ) h order by h.sort_no ASC-->
+<!--    </select>-->
     <select id="queryByUser" parameterType="Object" resultMap="SysPermission">
         SELECT * FROM (
         SELECT p.*
@@ -57,14 +86,16 @@
         <!--update begin Author:lvdandan  Date:20200213 for：加入部门权限 -->
         UNION
         SELECT p.*
-        FROM sys_permission p
-        WHERE exists(
-        select a.id from sys_depart_role_permission a
-        join sys_depart_role b on a.role_id = b.id
-        join sys_depart_role_user c on c.drole_id = b.id
-        join sys_user d on d.id = c.user_id
-        where p.id = a.permission_id AND d.username = #{username,jdbcType=VARCHAR}
-        )
+        FROM sys_permission p WHERE id IN (
+        SELECT permission_id  FROM sys_depart_role_permission WHERE role_id = (
+        SELECT drole_id FROM sys_depart_role_user WHERE user_id = (
+            SELECT id FROM sys_user WHERE username=#{username,jdbcType=VARCHAR}
+            )
+        AND drole_id =  (
+        SELECT id FROM sys_depart_role WHERE depart_id = (
+        SELECT id FROM sys_depart WHERE org_code = (
+            SELECT org_code FROM sys_user WHERE username =#{username,jdbcType=VARCHAR}
+        )))))
         and p.del_flag = 0
         <!--update end Author:lvdandan  Date:20200213 for：加入部门权限 -->
         ) h order by h.sort_no ASC
@@ -104,5 +135,15 @@
         ) temp
     </select>
 
+
+<!--     获取部门权限-->
+    <select id="queryUserDepartPermissions" parameterType="Object" resultMap="SysPermission">
+        SELECT * FROM sys_permission WHERE id IN (
+            SELECT permission_id  FROM sys_depart_role_permission WHERE role_id = (
+                SELECT drole_id FROM sys_depart_role_user WHERE user_id = #{userId,jdbcType=VARCHAR}
+                                                            AND drole_id =  (
+                    SELECT id FROM sys_depart_role WHERE depart_id = (
+                        SELECT id FROM sys_depart WHERE org_code = #{orgCode,jdbcType=VARCHAR}))))
+    </select>
 
 </mapper>

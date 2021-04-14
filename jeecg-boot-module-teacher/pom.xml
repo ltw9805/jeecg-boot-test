@@ -23,6 +23,7 @@
         <module>jeecg-boot-module-teacher-api</module>
         <module>jeecg-boot-module-teacher-biz</module>
         <module>jeecg-boot-module-teacher-start</module>
+
     </modules>
     <dependencies>
 <!--        <dependency>-->

@@ -6,6 +6,8 @@ import feign.RequestInterceptor;
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
 import lombok.extern.slf4j.Slf4j;
+//import org.jeecg.common.constante.CommonConstant;
+//import org.jeecg.common.constant.CommonConstant;
 import org.jeecg.common.constant.CommonConstant;
 import org.jeecg.config.FeignConfig;
 import org.springframework.beans.factory.ObjectFactory;

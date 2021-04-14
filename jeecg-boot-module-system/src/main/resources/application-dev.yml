@@ -204,6 +204,7 @@ jeecg:
   # minio文件上传
   minio:
     minio_url: http://minio.jeecg.com
+    minio_url: http://minio.jeecg.com
     minio_name: ??
     minio_pass: ??
     bucketName: otatest

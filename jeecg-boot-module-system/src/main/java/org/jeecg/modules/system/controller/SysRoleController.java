@@ -376,11 +376,11 @@ public class SysRoleController {
         List<String> ids = new ArrayList<>();
         try {
             LambdaQueryWrapper<SysPermission> query = new LambdaQueryWrapper<SysPermission>();
-            query.eq(SysPermission::getDelFlag, CommonConstant.DEL_FLAG_0);
-            query.orderByAsc(SysPermission::getSortNo);
-            List<SysPermission> list = sysPermissionService.list(query);
+            query.eq(SysPermission::getDelFlag, CommonConstant.DEL_FLAG_0);  // 查询未删除状态（delFlag=0）的菜单
+            query.orderByAsc(SysPermission::getSortNo);                      // 按照菜单的排序编号（SortNo）正序排序
+            List<SysPermission> list = sysPermissionService.list(query);     //
             for (SysPermission sysPer : list) {
-                ids.add(sysPer.getId());
+                ids.add(sysPer.getId());                                     //添加到权限ids
             }
             List<TreeModel> treeList = new ArrayList<>();
             getTreeModelList(treeList, list, null);

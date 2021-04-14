@@ -52,7 +52,9 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
+
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        log.info("------ Shiro拦截的请求：{} ",httpServletRequest.getRequestURI());
         String token = httpServletRequest.getHeader(CommonConstant.X_ACCESS_TOKEN);
         // update-begin--Author:lvdandan Date:20210105 for：JT-355 OA聊天添加token验证，获取token参数
         if(token == null){

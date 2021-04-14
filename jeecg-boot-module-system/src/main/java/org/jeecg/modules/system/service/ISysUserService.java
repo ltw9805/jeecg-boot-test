@@ -1,5 +1,6 @@
 package org.jeecg.modules.system.service;
 
+import java.security.Permission;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -249,4 +250,7 @@ public interface ISysUserService extends IService<SysUser> {
      * @return
      */
     List<SysUser> queryByDepIds(List<String> departIds, String username);
+
+
+
 }

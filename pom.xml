@@ -61,7 +61,10 @@
         <!-- 需要微服务，请打开注释 -->
         <module>jeecg-boot-starter</module>
         <module>jeecg-cloud-module</module>
+
         <module>jeecg-boot-module-demandMangement-2</module>
+        <module>jeecg-boot-module-demandMangement</module>
+
 
 
     </modules>
@@ -291,6 +294,12 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
+<!--            &lt;!&ndash;  可能出现@profile.name@ 读取不了的问题，添加snakeyaml     &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.yaml</groupId>-->
+<!--                <artifactId>snakeyaml</artifactId>-->
+<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
