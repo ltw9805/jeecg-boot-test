@@ -35,6 +35,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="teacher-cloud-api" />
     <orderEntry type="module" module-name="jeecg-system-local-api" />
     <orderEntry type="module" module-name="jeecg-boot-base-core" />
     <orderEntry type="module" module-name="jeecg-boot-base-tools" />

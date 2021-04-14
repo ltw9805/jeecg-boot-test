@@ -1,5 +1,5 @@
 server:
-  port: 7788
+  port: 7789
 spring:
   application:
-    name: demand-mangement
+    name: demand-mangement-2
